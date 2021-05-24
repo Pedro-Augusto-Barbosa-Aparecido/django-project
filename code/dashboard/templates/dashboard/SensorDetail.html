@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block cssExtern %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/containers.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/img.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/links.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/randons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tables.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+      <h1 style="color: black;"> {{ titulo }} </h1>
+      <p>Sensor {{ sensor.model }} do tipo {{ sensor.type_sensor_str }}, temos registrados apenas estes valores: </p>
+
+      <table class="table table-hover">
+          <tr class="table-dark">
+              <td class="table-dark">Valores registrados pelo Sensor {{ sensor }}</td>
+          </tr>
+
+          {% for value in values %}
+            <tr class="table-primary"> <td class="table-primary container"> {{ value.value_show }} </td> </tr>
+          {% endfor %}
+
+      </table>
+    </div>
+
+{% endblock %}

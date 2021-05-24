@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block cssExtern %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/containers.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/fonts.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/img.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/links.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/randons.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/tables.css' %}">
+{% endblock %}
+
+{% block bgHome %}
+
+  <div>
+    <img class="bgImage" src="{% static 'img/Background.png' %}">
+  </div>
+
+  {% block content %}
+    <div class="baseHomeCss boxContent">
+      <div class="tables-div">
+        <table class="table table-primary right">
+            <tr class="table-dark">
+                <td class="table-dark">Modelo</td>
+                <td class="table-dark">Tipo</td>
+            </tr>
+
+            {% for sensor in sensors %}
+                {% if sensor.type_sensor == 'C' %}
+                    <tr class="table-primary">
+                        <td class="table-primary">
+                            {{ sensor }}
+                        </td>
+
+                        <td class="table-primary">
+                            {{ sensor.type_sensor_str }}
+                        </td>
+                    </tr>
+                {% elif sensor.type_sensor == 'A' %}
+                    <tr class="table-info">
+                        <td class="table-info">
+                            {{ sensor }}
+                        </td>
+
+                        <td class="table-info">
+                            {{ sensor.type_sensor_str }}
+                        </td>
+                    </tr>
+                {% elif sensor.type_sensor == 'V' %}
+                    <tr class="table-secondary">
+                        <td class="table-secondary">
+                            {{ sensor }}
+                        </td>
+
+                        <td class="table-secondary">
+                            {{ sensor.type_sensor_str }}
+                        </td>
+                    </tr>
+                {% elif sensor.type_sensor == 'L' %}
+                    <tr class="table-light">
+                        <td class="table-light">
+                            {{ sensor }}
+                        </td>
+
+                        <td class="table-light">
+                            {{ sensor.type_sensor_str }}
+                        </td>
+                    </tr>
+                {% elif sensor.type_sensor == 'F' %}
+                    <tr class="table-success">
+                        <td class="table-success">
+                            {{ sensor }}
+                        </td>
+
+                        <td class="table-success">
+                            {{ sensor.type_sensor_str }}
+                        </td>
+                    </tr>
+                {% elif sensor.type_sensor == 'T' %}
+                    <tr class="table-danger">
+                        <td class="table-danger">
+                            {{ sensor }}
+                        </td>
+
+                        <td class="table-danger">
+                            {{ sensor.type_sensor_str }}
+                        </td>
+                    </tr>
+
+                {% else %}
+                    <tr class="table-danger">
+                        <td class="table-warning">
+                            {{ sensor }}
+                        </td>
+                        <td class="table-warning">
+                            {{ sensor.type_sensor_str }}
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+      </div>
+      <div class="">
+          <h1 class="bottom">Escolha uma das opções</h1>
+
+          <a class="btn btn-warning btn-lg tables-btn" href="{% url 'sensor-list' %}">Sensores</a>
+          <a class="btn btn-warning btn-lg tables-btn" href="{% url 'value-list' %}">Valores</a>
+
+          <p class="fontCSS tables">Para ver o restantes dos Dados, certifique-se que está logado e escolha o dado!!</p>
+      </div>
+      <div class="tables-div">
+        <table class="table table-primary right">
+            <tr class="table-dark">
+                <td class="table-dark">Sensor</td>
+                <td class="table-dark">Valor</td>
+            </tr>
+
+            {% for value in values %}
+                <tr class="table-primary">
+                    <td class="table-primary">
+                        {{ value.id_sensor.model }}
+                    </td>
+
+                    <td class="table-primary">
+                        {{ value.value }}
+                    </td>
+                </tr>
+            {% endfor %}
+      </div>
+    </div>
+  {% endblock %}
+{% endblock %}

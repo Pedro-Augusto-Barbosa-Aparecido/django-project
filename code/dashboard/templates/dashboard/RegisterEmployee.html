@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block cssExtern %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/containers.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/img.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/links.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/randons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tables.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="form-row">
+            <form>
+                {% csrf_token %}
+                {{ form.as_p }}
+            </form>
+        </div>
+    </div>
+{% endblock %}

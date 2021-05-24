@@ -1,0 +1,11 @@
+.right {
+    margin-right: 10rem;
+}
+
+.bottom {
+    margin-bottom: calc(2rem * 0.7);
+}
+
+.left {
+    margin-left: calc(10rem * 0.7);
+}

@@ -1,0 +1,23 @@
+.link-in-table {
+    text-decoration: none;
+    color: black;
+}
+
+.link-in-table:hover {
+    text-decoration: dashed;
+    color: red;
+
+    cursor: pointer;
+}
+
+.link-btn-export {
+    text-decoration: none;
+    color: black;
+}
+
+.link-btn-export:hover {
+    text-decoration: solid;
+    color: white;
+
+    cursor: pointer;
+}

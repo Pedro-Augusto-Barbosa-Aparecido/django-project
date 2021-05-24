@@ -1,0 +1,28 @@
+.fontCSS {
+    font-family: "Arial Black";
+    font-feature-settings: normal;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 0.95rem;
+
+    color: white;
+
+}
+
+.fp {
+    margin-top: 20px;
+}
+
+h1 {
+    margin-left: 13rem;
+    margin-bottom: 80px;
+    margin-top: 10px;
+
+    font-size: 1.5rem;
+    font-family: "Arial Black";
+    font-feature-settings: normal;
+    font-style: italic;
+    font-weight: bold;
+
+    color: #000000;
+}

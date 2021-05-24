@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block cssExtern %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/containers.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/img.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/links.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/randons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tables.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 style="font-family: 'Arial Black'; font-style: italic; margin-left: calc(50% - 200px); color: black;"> {{ title }} </h1>
+
+        {% if not is_user %}
+            <p class="fp left">
+                Nesta página você poderá visualizar todos os {{ mensage }}, também poderá gerencia-los e até deleta-los. Desenvolvedor
+                Pedro <br> Augusto Barbosa Aparecido.
+            </p>
+        {% else %}
+            <p class="fp left">
+                Lista de Funcionários cadastrados.
+            </p>
+        {% endif %}
+
+        <div class="btn btn-outline-warning bottom btn-lg">
+            <a class="link-btn-export" href="{% url 'export-excel' type %}">Export to excel</a>
+            <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+        </div>
+
+        <table class="table table-hover">
+
+            <tr class="table-dark">
+                <td class="table-dark">{{ header_table_0 }}</td>
+                <td class="table-dark">{{ header_table_1 }}</td>
+            </tr>
+
+
+            {% if type_object == 'sensors' %}
+                {% for sensor in object_list %}
+                     <tr class="table-primary">
+                        <td class="table-primary">
+                            <a class="link-in-table" href="{% url 'detail-sensor' sensor.id %}">{{ sensor }}</a>
+                        </td>
+
+                        <td class="table-primary">
+                            {{ sensor.type_sensor_str }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% elif type_object == 'value' %}
+                {% for value in object_list %}
+                     <tr class="table-primary">
+                        <td class="table-primary">
+                            <a class="link-in-table" href="{% url 'detail-sensor' value.id_sensor.id %}">{{ value.id_sensor }}</a>
+                        </td>
+
+                        <td class="table-primary">
+                            {{ value.value_show }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+
+        </table>
+    </div>
+{% endblock %}

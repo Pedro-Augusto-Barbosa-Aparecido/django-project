@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block cssExtern %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/containers.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/img.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/links.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/randons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tables.css' %}">
+{% endblock %}
+
+{% block bgHome %}
+
+  <div>
+    <img class="bgImage" src="{% static 'img/Background.png' %}">
+  </div>
+
+  {% block content_home %}
+    <div class="container baseHomeCss">
+      <div class="boxFont">
+          <h1 class="">ESPECIFICAÇÃO SOBRE O PROJETO</h1>
+
+          <p class="fontCSS fp">UM PROJETO DE AUTOMAÇÃO INDUSTRIAL QUE TEM COMO OBJETIVO MONITORAR TODO UM SISTEMA INDUSTRIAL. UTILIZANDO UMA AI, SERÁ POSSÍVEL TER</p>
+          <p class="fontCSS">CONTROLE SOBRE TODOS OS PROCESSOS DE FUNCIONAMENTO DO SISTEMA INDUSTRIAL. INCLUINDO A REPOSIÇÃO DE PEÇAS E O AVISO DE COMPONENTES</p>
+          <p class="fontCSS">POSSIVELMENTE DANIFICADOS, ALÉM DE AVISAR QUANDO NECESSÁRIO A MANUTENÇÃO MENSAL DE CADA EQUIPAMENTOS. APÓS UM CERTO PERÍODO DE</p>
+          <p class="fontCSS">APRENDIZAGEM A AI NÃO NECESSITA MAIS DE SUPERVISÃO DE UM SUPERVISOR, SENDO CAPAZ DE IDENTIFICAR FALHA EM SEU PRÓPRIO SISTEMA. A AI NÃO</p>
+          <p class="fontCSS">DEPENDE DE UM PROCESSO EXTERNO SENDO CAPAZ DE CALCULAR AS CHANCES DE FALHAS NA CRIAÇÃO DE PRODUTOS.</p>
+      </div>
+        
+        <a href="#">
+            <img class="imgIcon" src="{% static 'img/IA_Icon.png' %}">
+        </a>
+        <a href="{% url 'data-base-page' %}">
+            <img class="imgIcon" src="{% static 'img/DataBase_Icon.png' %}">
+        </a>
+
+    </div>
+  {% endblock %}
+
+{% endblock %}
+
