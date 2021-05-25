@@ -1,10 +1,9 @@
-import csv
-import os
-
 from django.contrib.auth.decorators import login_required
+from django.utils.encoding import smart_str
 from django.views.generic import ListView, View
 from django.shortcuts import render
 from django.http import Http404, HttpResponse, FileResponse
+from proj.settings import BASE_DIR
 
 # Create your views here.
 from dashboard.forms import UsersSystemForm
@@ -116,38 +115,45 @@ class UsersSystemCreateView(View):
 def export_to_excel(request, id):
     def __how_many_duplicates_in_sensor_df(df: pd.DataFrame):
         df_aux = df.drop_duplicates()
-        list_sensor = list(df_aux['model'])
+        list_sensor = list(df_aux['Models'])
         __return = []
         for i in range(len(list_sensor)):
-            _aux = df['model'] == list_sensor[i]
+            _aux = df['Models'] == list_sensor[i]
             __return.append(df[_aux].shape[0])
 
         return __return
 
-    qs_sensor = Sensor.objects.all().values_list(flat=True)
-    qs_values = Value.objects.all().values_list(flat=True)
+    # def drop_duplicates(data_frame: pd.DataFrame):
+    #     df_aux = data_frame.drop_duplicates()
+    #     list_sensor = list(df_aux['Models'])
+    #     __return = data_frame
+    #     for i in range(len(list_sensor)):
+    #         _aux = data_frame['Models'] == list_sensor[i]
+    #         __return = __return[_aux]
+    #
+    #     return __return
+
+    qs_sensor = Sensor.objects.filter().values_list()
+    qs_values = Value.objects.filter()
 
     if id == 0:
         response = HttpResponse(
-            content_type='text/csv',
+            content_type='application/ms-excel',
             headers={'Content-Disposition': 'attachment; filename="export.csv"'},
         )
 
-        df = pd.DataFrame(qs_sensor, columns=['model', 'type_sensor'])
+        df = pd.DataFrame(qs_sensor, columns=['Ids', 'Models', 'Types'])
+        df_count_duplicates = __how_many_duplicates_in_sensor_df(df=df)
 
-        duplicates = __how_many_duplicates_in_sensor_df(df=df)
         df.drop_duplicates(inplace=True)
         df.index = range(df.shape[0])
 
-        data = pd.DataFrame([duplicates], columns=['Quantidade'])
+        df_excel = df.assign(Teste=df_count_duplicates)
+        print(df_excel)
 
-        file = pd.concat([df, data])
-        file.to_csv(path_or_buf='exports/export.csv', sep=';')
-
-        response.headers['Content-Disposition'] = f'attachment; filename="exports/export.csv"'
+        df_excel.to_excel(excel_writer=response, sheet_name='data')
 
         return response
-
 
 
 
