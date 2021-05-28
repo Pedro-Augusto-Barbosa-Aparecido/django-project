@@ -13,6 +13,33 @@ import pandas as pd
 import io
 
 
+class DashBoardListView(ListView):
+    model = None
+    template_name = ''
+
+    header_table_0 = ''
+    header_table_1 = ''
+
+    title = ''
+    title_page = ''
+
+    type_object = ''
+    type = None
+
+    message = ''
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['title'] = self.title
+        context['header_table_0'] = self.header_table_0
+        context['header_table_1'] = self.header_table_1
+        context['title_page'] = self.title_page
+        context['type_object'] = self.type_object
+        context['type'] = self.type
+        context['mensage'] = self.message
+
+
 class SensorListView(ListView):
     model = Sensor
     template_name = 'dashboard/listObjects.html'
